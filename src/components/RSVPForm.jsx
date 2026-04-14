@@ -271,14 +271,19 @@ export default function RSVPForm() {
           </AnimatePresence>
         </motion.div>
 
-        <motion.p
+        <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.5, duration: 0.6 }}
-          className="font-cormorant italic text-sm text-center text-[#7A7060] mt-6"
+          className="text-center mt-6"
         >
-          Made with love for {weddingData.couple.groom} {weddingData.couple.ampersand} {weddingData.couple.bride}
-        </motion.p>
+          <p className="font-cormorant italic text-sm text-[#7A7060] mb-2">
+            Made with love for {weddingData.couple.groom} {weddingData.couple.ampersand} {weddingData.couple.bride}
+          </p>
+          <p className="font-inter text-[9px] uppercase tracking-[0.2em] text-[#B8913A] opacity-70">
+            Crafted by <span className="font-medium">Jishnu P G</span>
+          </p>
+        </motion.div>
       </div>
     </section>
   );
