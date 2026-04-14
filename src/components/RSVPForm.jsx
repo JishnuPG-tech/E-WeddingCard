@@ -275,28 +275,28 @@ export default function RSVPForm() {
            initial={{ opacity: 0 }}
            animate={inView ? { opacity: 1 } : {}}
            transition={{ delay: 0.5, duration: 0.6 }}
-           className="text-center mt-6 flex flex-col items-center gap-1"
+           className="mt-8 flex flex-col items-center justify-center w-full"
         >
-          <p className="font-cormorant italic text-sm text-[#7A7060] mb-2">
+          {/* Subtle gold divider */}
+          <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-[#B8913A] to-transparent opacity-40 mb-4" />
+
+          <p className="font-cormorant italic text-sm text-[#7A7060] mb-3 text-center">
             Made with love for {weddingData.couple.groom} {weddingData.couple.ampersand} {weddingData.couple.bride}
           </p>
-          <div className="group relative inline-block">
-            <p className="font-inter text-[9px] uppercase tracking-[0.25em] text-[#8C7A5C] opacity-80 cursor-pointer">
-              Crafted by <a href="mailto:jishnupg2005@gmail.com" className="font-semibold text-[#B8913A] hover:opacity-80 transition-opacity" style={{ textDecoration: 'none' }}>Jishnu P G</a>
+
+          <a 
+            href="mailto:jishnupg2005@gmail.com"
+            className="group flex flex-col items-center gap-1.5 px-6 py-3 rounded-2xl border border-transparent hover:border-[rgba(184,145,58,0.2)] hover:bg-[rgba(255,255,255,0.4)] transition-all duration-400"
+            style={{ textDecoration: 'none' }}
+          >
+            <p className="font-inter text-[9.5px] uppercase tracking-[0.25em] text-[#7A7060] opacity-80">
+              Crafted by <span className="font-semibold text-[#B8913A] tracking-[0.1em] group-hover:text-[#9A7A30] transition-colors">Jishnu P G</span>
             </p>
-            {/* Hover Tooltip */}
-            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none z-[100] w-[180px]">
-               <div className="bg-[#FAF8F2] border border-[rgba(184,145,58,0.3)] rounded-lg px-3 py-2 shadow-xl">
-                 <p className="text-[#4A6A4A] text-[9.5px] font-semibold font-inter uppercase tracking-widest text-center">Full Stack Developer</p>
-                 <p className="text-[#7A7060] text-[8.5px] font-inter text-center mt-1 lowercase tracking-widest">Click to Hire via Email</p>
-               </div>
-               {/* Tooltip arrow */}
-               <div className="w-2.5 h-2.5 bg-[#FAF8F2] border-r border-b border-[rgba(184,145,58,0.3)] transform rotate-45 absolute -bottom-[5px] left-1/2 -translate-x-1/2"></div>
-            </div>
-          </div>
-          <p className="font-inter text-[6.5px] uppercase tracking-[0.25em] text-[#7A7060] opacity-40 mt-1">
-            Powered by React & Framer Motion
-          </p>
+            <p className="font-inter text-[8.5px] lowercase tracking-[0.15em] text-[#7A7060] opacity-50 group-hover:opacity-90 transition-opacity flex items-center gap-2">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              jishnupg2005@gmail.com
+            </p>
+          </a>
         </motion.div>
       </div>
     </section>
