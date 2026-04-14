@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { Check, X } from 'lucide-react';
 import Confetti from 'react-confetti';
 import { createClient } from '@supabase/supabase-js';
 
@@ -69,8 +70,8 @@ export default function RSVPForm() {
     : "We'll miss you!";
 
   const successMessage = attending
-    ? `Thank you, ${name}! Your attendance is confirmed. See you on the 22nd! \\u{1F389}`
-    : `Thank you, ${name}. We understand and appreciate you letting us know. \\u{1F49B}`;
+    ? `Thank you, ${name}! Your attendance is confirmed. See you on the 20th! \u{1F389}`
+    : `Thank you, ${name}. We understand and appreciate you letting us know. \u{1F49B}`;
 
   return (
     <section className="scroll-section flex items-center justify-center bg-[#F5F4F0] px-6 py-8 relative overflow-hidden">
@@ -130,7 +131,7 @@ export default function RSVPForm() {
                 </h3>
                 <p className="font-inter text-sm text-[#7A7060] leading-relaxed">
                   {attending
-                    ? 'Your attendance is confirmed. See you on the 22nd!'
+                    ? 'Your attendance is confirmed. See you on the 20th!'
                     : 'We understand and appreciate you letting us know.'}
                 </p>
                 <p className="font-inter text-sm text-[#7A7060] mt-1">
@@ -168,36 +169,46 @@ export default function RSVPForm() {
                   <label className="font-inter text-[11px] uppercase tracking-[0.2em] text-[#7A7060] block mb-2">
                     Will you attend?
                   </label>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-2 gap-4 mt-1">
                     {[
-                      { value: true, label: 'Yes, I will!' },
-                      { value: false, label: 'Regretfully no' },
-                    ].map((opt) => (
-                      <button
-                        key={String(opt.value)}
-                        type="button"
-                        onClick={() => setAttending(opt.value)}
-                        className="py-3 px-3 rounded-lg border text-sm font-inter transition-all duration-200 min-h-[48px]"
-                        style={{
-                          background:
-                            attending === opt.value
-                              ? opt.value
-                                ? '#6B8E6B'
-                                : '#C17A7A'
-                              : '#FAF8F2',
-                          color: attending === opt.value ? 'white' : '#7A7060',
-                          borderColor:
-                            attending === opt.value
-                              ? opt.value
-                                ? '#6B8E6B'
-                                : '#C17A7A'
-                              : 'rgba(107,142,107,0.2)',
-                          fontWeight: attending === opt.value ? '500' : '400',
-                        }}
-                      >
-                        {opt.label}
-                      </button>
-                    ))}
+                      { value: true, label: 'Joyfully Accept', icon: <Check size={28} strokeWidth={1.5} /> },
+                      { value: false, label: 'Regretfully Decline', icon: <X size={28} strokeWidth={1.5} /> },
+                    ].map((opt) => {
+                      const isSelected = attending === opt.value;
+                      const activeColor = opt.value ? '#6B8E6B' : '#C17A7A';
+                      
+                      return (
+                        <button
+                          key={String(opt.value)}
+                          type="button"
+                          onClick={() => setAttending(opt.value)}
+                          className="flex flex-col items-center justify-center gap-3 p-5 rounded-xl border transition-all duration-300 relative overflow-hidden"
+                          style={{
+                            background: isSelected ? activeColor : 'rgba(250, 248, 242, 0.5)',
+                            borderColor: isSelected ? activeColor : 'rgba(107,142,107,0.2)',
+                            color: isSelected ? 'white' : '#7A7060',
+                            transform: isSelected ? 'scale(0.98)' : 'scale(1)',
+                            boxShadow: isSelected ? `0 4px 15px ${activeColor}40` : 'none'
+                          }}
+                        >
+                          {/* Circle Icon holder */}
+                          <div 
+                            className="w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-300"
+                            style={{ 
+                              background: isSelected ? 'white' : 'transparent',
+                              color: isSelected ? activeColor : '#7A7060',
+                              border: isSelected ? 'none' : '1px solid rgba(107,142,107,0.2)'
+                            }}
+                          >
+                            {opt.icon}
+                          </div>
+                          
+                          <span className={`font-inter text-[11px] uppercase tracking-widest ${isSelected ? 'font-medium' : 'font-normal'}`}>
+                            {opt.label}
+                          </span>
+                        </button>
+                      );
+                    })}
                   </div>
                 </div>
 

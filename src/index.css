@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+Malayalam:wght@300;400;500;600&display=swap');
 
 :root {
   --ivory: #F8F7F4;
@@ -25,6 +25,8 @@ html {
 
 body {
   background-color: var(--ivory);
+  /* Elegant subtle paper noise texture */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
   font-family: 'Inter', sans-serif;
   color: var(--text-dark);
   margin: 0;
@@ -38,6 +40,10 @@ body {
 
 .font-playfair {
   font-family: 'Playfair Display', serif;
+}
+
+.font-malayalam {
+  font-family: 'Noto Serif Malayalam', serif;
 }
 
 /* Scroll snap container */
@@ -101,9 +107,11 @@ body {
 
 /* Card glass effect */
 .glass-card {
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 32px 0 rgba(107, 142, 107, 0.07), inset 0 0 0 1px rgba(255, 255, 255, 0.4);
 }
 
 /* Countdown box */

@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
-const DetailRow = ({ label, value, icon, delay = 0 }) => {
+const WEDDING_DATE = new Date('2026-05-20T10:30:00+05:30');
+
+function getTimeLeft() {
+  const now = new Date();
+  const diff = WEDDING_DATE - now;
+  if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+  return { days, hours, minutes, seconds };
+}
+
+const DetailRow = ({ label, value, delay = 0 }) => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
 
@@ -42,6 +55,29 @@ const MuralDivider = ({ delay = 0 }) => {
   );
 };
 
+const MinimalCountdown = () => {
+  const [time, setTime] = useState(getTimeLeft());
+  const isPast = WEDDING_DATE <= new Date();
+
+  useEffect(() => {
+    const interval = setInterval(() => setTime(getTimeLeft()), 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  if (isPast) return null;
+
+  return (
+    <div className="flex justify-center gap-4 mt-6 mb-2">
+      {Object.entries(time).map(([label, value]) => (
+        <div key={label} className="text-center flex flex-col items-center">
+          <span className="font-cormorant text-2xl text-[#2C2C2C] leading-none mb-1">{String(value).padStart(2, '0')}</span>
+          <span className="font-inter text-[8px] uppercase tracking-[0.2em] text-[#7A7060]">{label}</span>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 export default function InsideDetails({ guestName }) {
   const titleRef = useRef(null);
   const titleInView = useInView(titleRef, { once: true, margin: '-60px' });
@@ -62,44 +98,73 @@ export default function InsideDetails({ guestName }) {
         </motion.div>
 
         {/* Card */}
-        <div className="glass-card floral-border rounded-[20px] px-6 py-6 relative">
-          {/* Corner flourishes */}
-          <div className="absolute top-3 left-3 w-8 h-8 border-t border-l border-[#B8913A] border-opacity-35 rounded-tl-lg" />
-          <div className="absolute top-3 right-3 w-8 h-8 border-t border-r border-[#B8913A] border-opacity-35 rounded-tr-lg" />
-          <div className="absolute bottom-3 left-3 w-8 h-8 border-b border-l border-[#B8913A] border-opacity-35 rounded-bl-lg" />
-          <div className="absolute bottom-3 right-3 w-8 h-8 border-b border-r border-[#B8913A] border-opacity-35 rounded-br-lg" />
+        <div className="glass-card floral-border rounded-[20px] px-6 py-8 relative">
+          <div className="absolute top-3 left-3 w-8 h-8 border-t border-l border-[#B8913A] border-opacity-35 rounded-tl-[16px]" />
+          <div className="absolute top-3 right-3 w-8 h-8 border-t border-r border-[#B8913A] border-opacity-35 rounded-tr-[16px]" />
+          <div className="absolute bottom-3 left-3 w-8 h-8 border-b border-l border-[#B8913A] border-opacity-35 rounded-bl-[16px]" />
+          <div className="absolute bottom-3 right-3 w-8 h-8 border-b border-r border-[#B8913A] border-opacity-35 rounded-br-[16px]" />
 
-          {guestName && (
-            <DetailRow label="Invited Guest" value={`Dear ${guestName}`} delay={0} />
-          )}
+          {/* Calendar Block Design (Replacing basic Date row) */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="flex flex-col items-center border border-[rgba(107,142,107,0.2)] rounded-2xl p-5 mb-6 bg-[#FAF8F2]/60"
+          >
+            <div className="flex items-center justify-center gap-6 text-[#2C2C2C]">
+              {/* Left Column: Day */}
+              <div className="text-right border-r border-[rgba(107,142,107,0.3)] pr-5">
+                <p className="font-inter text-[10px] uppercase tracking-widest text-[#7A7060]">Wednesday</p>
+              </div>
+              
+              {/* Center: Large Number */}
+              <div className="text-center -mt-2">
+                <span className="font-cormorant font-light text-6xl leading-none text-[#4A6A4A]">20</span>
+              </div>
 
-          <MuralDivider delay={0.05} />
+              {/* Right Column: Month/Year */}
+              <div className="text-left border-l border-[rgba(107,142,107,0.3)] pl-5">
+                <p className="font-cormorant font-semibold text-lg leading-tight">May</p>
+                <p className="font-inter text-[10px] tracking-widest text-[#7A7060]">2026</p>
+              </div>
+            </div>
 
-          <DetailRow label="Date" value="Thursday, 22nd May 2025" delay={0.1} />
+            {/* Inline Minimal Countdown */}
+            <div className="w-full mt-4 pt-4 border-t border-[rgba(107,142,107,0.15)]">
+              <MinimalCountdown />
+            </div>
+          </motion.div>
 
           <MuralDivider delay={0.15} />
-
-          <DetailRow label="Muhurtham Time" value="10:30 AM to 11:15 AM" delay={0.2} />
-
+          <DetailRow label={
+            <div className="flex flex-col items-center">
+              <span>Muhurtham Time</span>
+              <span className="font-malayalam text-[13px] text-[#8BA88B] tracking-normal mt-0.5 capitalize">മുഹൂർത്തം</span>
+            </div>
+          } value="10:30 AM to 11:15 AM" delay={0.2} />
           <MuralDivider delay={0.25} />
-
-          <DetailRow label="Reception" value="6:00 PM onwards" delay={0.3} />
-
+          <DetailRow label={
+            <div className="flex flex-col items-center">
+              <span>Reception</span>
+              <span className="font-malayalam text-[13px] text-[#8BA88B] tracking-normal mt-0.5 capitalize">സൽക്കാരം</span>
+            </div>
+          } value="6:00 PM onwards" delay={0.3} />
           <MuralDivider delay={0.35} />
 
-          <DetailRow label="Venue" value="Kalyana Mandapam" delay={0.4} />
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.45, duration: 0.6 }}
-            className="font-inter text-sm text-center text-[#7A7060] mt-1"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="text-center py-4"
           >
-            12/45 Temple Road, Thrissur
-            <br />
-            Kerala — 680 001
-          </motion.p>
+             <p className="font-inter text-[10px] uppercase tracking-[0.3em] text-[#B8913A] mb-1">Venue</p>
+             <p className="font-cormorant text-2xl font-medium text-[#2C2C2C] leading-tight mb-2">Kalyana Mandapam</p>
+             <p className="font-inter text-[12px] text-[#7A7060] leading-relaxed">
+              12/45 Temple Road, Thrissur<br />Kerala — 680 001
+            </p>
+          </motion.div>
 
           <MuralDivider delay={0.5} />
 
@@ -107,15 +172,15 @@ export default function InsideDetails({ guestName }) {
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: '-60px' }}
             transition={{ delay: 0.55, duration: 0.6 }}
-            className="text-center pt-2"
+            className="text-center pt-3"
           >
-            <p className="font-inter text-[10px] uppercase tracking-[0.3em] text-[#7A7060] mb-2">Hosted by</p>
-            <p className="font-cormorant italic text-base text-[#4A6A4A] leading-relaxed">
+            <p className="font-inter text-[9px] uppercase tracking-[0.3em] text-[#7A7060] mb-2">Hosted by</p>
+            <p className="font-cormorant italic text-[15px] text-[#4A6A4A] leading-relaxed">
               Mr. &amp; Mrs. Krishnan Nair
               <br />
-              <span className="text-[#7A7060]">&amp;</span>
+              <span className="text-[#B8913A] my-1 inline-block opacity-60">✦</span>
               <br />
               Mr. &amp; Mrs. Suresh Menon
             </p>

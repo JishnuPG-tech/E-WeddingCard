@@ -65,42 +65,47 @@ export default function HeroCover({ guestName }) {
           <div className="absolute bottom-3 left-3 w-10 h-10 border-b border-l border-[#B8913A] border-opacity-40 rounded-bl-lg" />
           <div className="absolute bottom-3 right-3 w-10 h-10 border-b border-r border-[#B8913A] border-opacity-40 rounded-br-lg" />
 
-          {/* Small invitation label */}
-          <motion.p
-            variants={itemVariants}
-            className="font-inter text-[10px] uppercase tracking-[0.3em] text-[#7A7060] mb-4"
-          >
-            Wedding Invitation
-          </motion.p>
-
-          {/* Lotus accent */}
-          <motion.div variants={itemVariants} className="mb-4">
-            <LotusMini />
-          </motion.div>
-
-          {/* Guest personalization */}
-          {guestName && (
-            <motion.p
-              variants={itemVariants}
-              className="font-inter text-sm text-[#7A7060] mb-3"
-            >
-              Dear <span className="font-medium text-[#4A6A4A]">{guestName}</span>,
-            </motion.p>
+          {/* Small invitation label / Guest personalization badge */}
+          {guestName ? (
+            <motion.div variants={itemVariants} className="flex justify-center mb-5">
+              <div className="inline-block border border-[rgba(107,142,107,0.3)] shadow-sm rounded-full px-6 py-2.5 bg-[rgba(107,142,107,0.03)] backdrop-blur-sm">
+                <p className="font-inter text-[9px] uppercase tracking-[0.25em] text-[#7A7060] leading-relaxed">
+                  Exclusive Invitation For
+                  <span className="font-semibold text-[#4A6A4A] tracking-[0.15em] text-[11px] mt-0.5 block">{guestName}</span>
+                </p>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div variants={itemVariants} className="flex justify-center mb-5">
+              <div className="inline-block border border-[rgba(107,142,107,0.3)] shadow-sm rounded-full px-5 py-1.5 bg-[rgba(107,142,107,0.03)] backdrop-blur-sm">
+                <p className="font-inter text-[10px] uppercase tracking-[0.3em] text-[#7A7060]">
+                  Wedding Invitation
+                </p>
+              </div>
+            </motion.div>
           )}
 
-          {/* Invite line */}
-          <motion.p variants={itemVariants} className="font-cormorant text-[15px] italic text-[#7A7060] mb-5 leading-relaxed">
-            Together with their families, we joyfully invite you to celebrate the marriage of
-          </motion.p>
+          {/* Invite line with Malayalam Cultural Header */}
+          <motion.div variants={itemVariants} className="mb-5">
+            <p className="font-malayalam text-xl text-[#B8913A] opacity-80 mb-2 font-medium">വിവാഹ ക്ഷണം</p>
+            <p className="font-cormorant text-[15px] italic text-[#7A7060] leading-relaxed max-w-[240px] mx-auto">
+              Together with their families, we joyfully invite you to celebrate the marriage of
+            </p>
+          </motion.div>
 
           {/* Couple names */}
-          <motion.h1 variants={itemVariants} className="font-cormorant font-bold text-5xl leading-tight mb-2 gold-shimmer">
+          <motion.h1 variants={itemVariants} className="font-cormorant font-bold text-5xl leading-[0.9] tracking-[-0.02em] mb-2 gold-shimmer">
             Anand
           </motion.h1>
           <motion.p variants={itemVariants} className="font-cormorant italic text-lg text-[#B8913A] mb-2">&amp;</motion.p>
-          <motion.h1 variants={itemVariants} className="font-cormorant font-bold text-5xl leading-tight mb-6 gold-shimmer">
+          <motion.h1 variants={itemVariants} className="font-cormorant font-bold text-5xl leading-[0.9] tracking-[-0.02em] mb-8 gold-shimmer">
             Meera
           </motion.h1>
+
+          {/* Lotus accent moved to bottom center */}
+          <motion.div variants={itemVariants} className="mb-4">
+            <LotusMini />
+          </motion.div>
 
           {/* Date teaser */}
           <motion.div variants={itemVariants}>
@@ -108,7 +113,7 @@ export default function HeroCover({ guestName }) {
               <span>✦</span>
             </div>
             <p className="font-inter text-[12px] uppercase tracking-[0.25em] text-[#7A7060]">
-              May 22 · 2025
+              May 20 · 2026
             </p>
           </motion.div>
         </motion.div>

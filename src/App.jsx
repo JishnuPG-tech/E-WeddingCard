@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import LotusLoader from './LotusLoader';
+import Envelope from './components/Envelope';
 import HeroCover from './components/HeroCover';
 import InsideDetails from './components/InsideDetails';
-import CountdownTimer from './components/CountdownTimer';
 import VenueSection from './components/VenueSection';
 import RSVPForm from './components/RSVPForm';
 import MusicWidget from './components/MusicWidget';
@@ -29,16 +28,13 @@ export default function App() {
   const params = new URLSearchParams(window.location.search);
   const guestName = params.get('guest') || '';
 
-  // Loader takes ~3.7s (2.5 delay + 1.2 fade)
-  useEffect(() => {
-    const t = setTimeout(() => setLoaderDone(true), 3800);
-    return () => clearTimeout(t);
-  }, []);
-
+  // Loader/Envelope state removes the forced timeout, relying on Envelope button click
+  // so we don't auto-dissolve the loader until they "open" it.
+  
   return (
     <div className="relative w-full bg-[#F8F7F4]">
-      {/* Lotus Loader Overlay */}
-      <LotusLoader />
+      {/* Envelope Landing Gate */}
+      {!loaderDone && <Envelope onOpen={() => setLoaderDone(true)} />}
 
       {/* Background floating leaves (fixed, decorative) */}
       <FloatingLeaf
@@ -62,7 +58,6 @@ export default function App() {
       <div className="scroll-container">
         <HeroCover guestName={guestName} />
         <InsideDetails guestName={guestName} />
-        <CountdownTimer />
         <VenueSection />
         <RSVPForm />
       </div>

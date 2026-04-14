@@ -5,16 +5,19 @@ const GOOGLE_MAPS_URL = 'https://maps.google.com/?q=Kalyana+Mandapam+Thrissur+Ke
 const WHATSAPP_SHARE_URL = `https://wa.me/?text=${encodeURIComponent("You're invited to the wedding of Anand & Meera! 📍 Kalyana Mandapam, Thrissur 📅 22nd May 2025")}`;
 const CALENDAR_URL = `https://www.google.com/calendar/render?action=TEMPLATE&text=Wedding+of+Anand+%26+Meera&dates=20250522T050000Z/20250522T160000Z&details=Kalyana+Mandapam,+Thrissur,+Kerala&location=Thrissur,+Kerala`;
 
-const ActionButton = ({ href, icon, label, primary = false, delay = 0 }) => {
+const ActionButton = ({ href, onClick, icon, label, primary = false, delay = 0 }) => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-50px' });
 
+  const Component = onClick ? motion.button : motion.a;
+  
   return (
-    <motion.a
+    <Component
       ref={ref}
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+      onClick={onClick}
+      target={href ? "_blank" : undefined}
+      rel={href ? "noopener noreferrer" : undefined}
       initial={{ opacity: 0, y: 14 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.55, ease: 'easeOut', delay }}
@@ -23,13 +26,38 @@ const ActionButton = ({ href, icon, label, primary = false, delay = 0 }) => {
     >
       <span className="text-base">{icon}</span>
       <span>{label}</span>
-    </motion.a>
+    </Component>
   );
 };
 
 export default function VenueSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-60px' });
+
+  const downloadICS = (e) => {
+    e.preventDefault();
+    const fileContent = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//AnandAndMeeraWedding//EN
+BEGIN:VEVENT
+UID:${new Date().toISOString()}
+DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z
+DTSTART:20260520T050000Z
+DTEND:20260520T160000Z
+SUMMARY:Wedding of Anand & Meera
+DESCRIPTION:Please join us for our marriage ceremony.
+LOCATION:Kalyana Mandapam, Thrissur, Kerala
+END:VEVENT
+END:VCALENDAR`;
+
+    const blob = new Blob([fileContent], { type: 'text/calendar;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', 'Anand_Meera_Wedding.ics');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <section className="scroll-section flex items-center justify-center bg-[#F8F7F4] px-6 py-8">
@@ -90,19 +118,17 @@ export default function VenueSection() {
                 delay={0.25}
               />
               <div className="grid grid-cols-2 gap-3">
-                <motion.a
-                  href={CALENDAR_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <motion.button
+                  onClick={downloadICS}
                   initial={{ opacity: 0, y: 12 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.32, duration: 0.55 }}
-                  className="btn-secondary"
-                  style={{ textDecoration: 'none', fontSize: 13 }}
+                  className="btn-secondary flex items-center justify-center gap-2"
+                  style={{ fontSize: 13 }}
                 >
-                  <span>📅</span>
-                  <span>Add to Calendar</span>
-                </motion.a>
+                  <span className="text-base">📅</span>
+                  <span>Add Calendar</span>
+                </motion.button>
                 <motion.a
                   href={WHATSAPP_SHARE_URL}
                   target="_blank"
