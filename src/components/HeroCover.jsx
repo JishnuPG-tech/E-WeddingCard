@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { weddingData } from '../config/weddingData';
 
 // Floating decorative leaf SVG
 const LeafSvg = ({ className }) => (
@@ -87,19 +88,19 @@ export default function HeroCover({ guestName }) {
 
           {/* Invite line with Malayalam Cultural Header */}
           <motion.div variants={itemVariants} className="mb-5">
-            <p className="font-malayalam text-xl text-[#B8913A] opacity-80 mb-2 font-medium">വിവാഹ ക്ഷണം</p>
+            <p className="font-malayalam text-xl text-[#B8913A] opacity-80 mb-2 font-medium">{weddingData.strings.invitePrimaryMl}</p>
             <p className="font-cormorant text-[15px] italic text-[#7A7060] leading-relaxed max-w-[240px] mx-auto">
-              Together with their families, we joyfully invite you to celebrate the marriage of
+              {weddingData.strings.inviteSecondaryEn}
             </p>
           </motion.div>
 
           {/* Couple names */}
           <motion.h1 variants={itemVariants} className="font-cormorant font-bold text-5xl leading-[0.9] tracking-[-0.02em] mb-2 gold-shimmer">
-            Anand
+            {weddingData.couple.groom}
           </motion.h1>
-          <motion.p variants={itemVariants} className="font-cormorant italic text-lg text-[#B8913A] mb-2">&amp;</motion.p>
+          <motion.p variants={itemVariants} className="font-cormorant italic text-lg text-[#B8913A] mb-2">{weddingData.couple.ampersand}</motion.p>
           <motion.h1 variants={itemVariants} className="font-cormorant font-bold text-5xl leading-[0.9] tracking-[-0.02em] mb-8 gold-shimmer">
-            Meera
+            {weddingData.couple.bride}
           </motion.h1>
 
           {/* Lotus accent moved to bottom center */}
@@ -113,7 +114,7 @@ export default function HeroCover({ guestName }) {
               <span>✦</span>
             </div>
             <p className="font-inter text-[12px] uppercase tracking-[0.25em] text-[#7A7060]">
-              May 20 · 2026
+              {weddingData.dates.headerDisplay}
             </p>
           </motion.div>
         </motion.div>

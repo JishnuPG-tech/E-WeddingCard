@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { weddingData } from '../config/weddingData';
 
-const WEDDING_DATE = new Date('2026-05-20T10:30:00+05:30');
+const WEDDING_DATE = new Date(weddingData.dates.preciseDateIso);
 
 function getTimeLeft() {
   const now = new Date();
@@ -104,7 +105,7 @@ export default function InsideDetails({ guestName }) {
           <div className="absolute bottom-3 left-3 w-8 h-8 border-b border-l border-[#B8913A] border-opacity-35 rounded-bl-[16px]" />
           <div className="absolute bottom-3 right-3 w-8 h-8 border-b border-r border-[#B8913A] border-opacity-35 rounded-br-[16px]" />
 
-          {/* Calendar Block Design (Replacing basic Date row) */}
+          {/* Calendar Block Design */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -113,24 +114,18 @@ export default function InsideDetails({ guestName }) {
             className="flex flex-col items-center border border-[rgba(107,142,107,0.2)] rounded-2xl p-5 mb-6 bg-[#FAF8F2]/60"
           >
             <div className="flex items-center justify-center gap-6 text-[#2C2C2C]">
-              {/* Left Column: Day */}
               <div className="text-right border-r border-[rgba(107,142,107,0.3)] pr-5">
-                <p className="font-inter text-[10px] uppercase tracking-widest text-[#7A7060]">Wednesday</p>
+                <p className="font-inter text-[10px] uppercase tracking-widest text-[#7A7060]">{weddingData.dates.calendar.dayOfWeek}</p>
               </div>
-              
-              {/* Center: Large Number */}
               <div className="text-center -mt-2">
-                <span className="font-cormorant font-light text-6xl leading-none text-[#4A6A4A]">20</span>
+                <span className="font-cormorant font-light text-6xl leading-none text-[#4A6A4A]">{weddingData.dates.calendar.dayNumber}</span>
               </div>
-
-              {/* Right Column: Month/Year */}
               <div className="text-left border-l border-[rgba(107,142,107,0.3)] pl-5">
-                <p className="font-cormorant font-semibold text-lg leading-tight">May</p>
-                <p className="font-inter text-[10px] tracking-widest text-[#7A7060]">2026</p>
+                <p className="font-cormorant font-semibold text-lg leading-tight">{weddingData.dates.calendar.month}</p>
+                <p className="font-inter text-[10px] tracking-widest text-[#7A7060]">{weddingData.dates.calendar.year}</p>
               </div>
             </div>
 
-            {/* Inline Minimal Countdown */}
             <div className="w-full mt-4 pt-4 border-t border-[rgba(107,142,107,0.15)]">
               <MinimalCountdown />
             </div>
@@ -139,17 +134,17 @@ export default function InsideDetails({ guestName }) {
           <MuralDivider delay={0.15} />
           <DetailRow label={
             <div className="flex flex-col items-center">
-              <span>Muhurtham Time</span>
-              <span className="font-malayalam text-[13px] text-[#8BA88B] tracking-normal mt-0.5 capitalize">മുഹൂർത്തം</span>
+              <span>{weddingData.events.ceremony.titleEn}</span>
+              <span className="font-malayalam text-[13px] text-[#8BA88B] tracking-normal mt-0.5 capitalize">{weddingData.events.ceremony.titleMl}</span>
             </div>
-          } value="10:30 AM to 11:15 AM" delay={0.2} />
+          } value={weddingData.events.ceremony.timeText} delay={0.2} />
           <MuralDivider delay={0.25} />
           <DetailRow label={
             <div className="flex flex-col items-center">
-              <span>Reception</span>
-              <span className="font-malayalam text-[13px] text-[#8BA88B] tracking-normal mt-0.5 capitalize">സൽക്കാരം</span>
+              <span>{weddingData.events.reception.titleEn}</span>
+              <span className="font-malayalam text-[13px] text-[#8BA88B] tracking-normal mt-0.5 capitalize">{weddingData.events.reception.titleMl}</span>
             </div>
-          } value="6:00 PM onwards" delay={0.3} />
+          } value={weddingData.events.reception.timeText} delay={0.3} />
           <MuralDivider delay={0.35} />
 
           <motion.div
@@ -160,9 +155,9 @@ export default function InsideDetails({ guestName }) {
             className="text-center py-4"
           >
              <p className="font-inter text-[10px] uppercase tracking-[0.3em] text-[#B8913A] mb-1">Venue</p>
-             <p className="font-cormorant text-2xl font-medium text-[#2C2C2C] leading-tight mb-2">Kalyana Mandapam</p>
+             <p className="font-cormorant text-2xl font-medium text-[#2C2C2C] leading-tight mb-2">{weddingData.venue.name}</p>
              <p className="font-inter text-[12px] text-[#7A7060] leading-relaxed">
-              12/45 Temple Road, Thrissur<br />Kerala — 680 001
+              {weddingData.venue.addressEn[0]}<br />{weddingData.venue.addressEn[1]}
             </p>
           </motion.div>
 
@@ -178,11 +173,15 @@ export default function InsideDetails({ guestName }) {
           >
             <p className="font-inter text-[9px] uppercase tracking-[0.3em] text-[#7A7060] mb-2">Hosted by</p>
             <p className="font-cormorant italic text-[15px] text-[#4A6A4A] leading-relaxed">
-              Mr. &amp; Mrs. Krishnan Nair
+              {weddingData.hosts[0]}
               <br />
-              <span className="text-[#B8913A] my-1 inline-block opacity-60">✦</span>
-              <br />
-              Mr. &amp; Mrs. Suresh Menon
+              {weddingData.hosts.length > 1 && (
+                <>
+                  <span className="text-[#B8913A] my-1 inline-block opacity-60">✦</span>
+                  <br />
+                  {weddingData.hosts[1]}
+                </>
+              )}
             </p>
           </motion.div>
         </div>

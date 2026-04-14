@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { Check, X } from 'lucide-react';
 import Confetti from 'react-confetti';
 import { createClient } from '@supabase/supabase-js';
+import { weddingData } from '../config/weddingData';
 
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || '';
 const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
@@ -70,7 +71,7 @@ export default function RSVPForm() {
     : "We'll miss you!";
 
   const successMessage = attending
-    ? `Thank you, ${name}! Your attendance is confirmed. See you on the 20th! \u{1F389}`
+    ? `Thank you, ${name}! Your attendance is confirmed. See you on the ${weddingData.dates.rsvpDeadlineSummary}! \u{1F389}`
     : `Thank you, ${name}. We understand and appreciate you letting us know. \u{1F49B}`;
 
   return (
@@ -131,7 +132,7 @@ export default function RSVPForm() {
                 </h3>
                 <p className="font-inter text-sm text-[#7A7060] leading-relaxed">
                   {attending
-                    ? 'Your attendance is confirmed. See you on the 20th!'
+                    ? `Your attendance is confirmed. See you on the ${weddingData.dates.rsvpDeadlineSummary}!`
                     : 'We understand and appreciate you letting us know.'}
                 </p>
                 <p className="font-inter text-sm text-[#7A7060] mt-1">
@@ -139,7 +140,7 @@ export default function RSVPForm() {
                 </p>
                 <div className="mt-5 pt-4 border-t border-[rgba(107,142,107,0.15)]">
                   <p className="font-cormorant italic text-sm text-[#B8913A]">
-                    With love, Anand &amp; Meera
+                    With love, {weddingData.couple.groom} {weddingData.couple.ampersand} {weddingData.couple.bride}
                   </p>
                 </div>
               </motion.div>
@@ -276,7 +277,7 @@ export default function RSVPForm() {
           transition={{ delay: 0.5, duration: 0.6 }}
           className="font-cormorant italic text-sm text-center text-[#7A7060] mt-6"
         >
-          Made with love for Anand &amp; Meera
+          Made with love for {weddingData.couple.groom} {weddingData.couple.ampersand} {weddingData.couple.bride}
         </motion.p>
       </div>
     </section>
