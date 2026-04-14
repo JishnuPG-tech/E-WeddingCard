@@ -1,0 +1,74 @@
+import React, { useEffect, useState } from 'react';
+import LotusLoader from './LotusLoader';
+import HeroCover from './components/HeroCover';
+import InsideDetails from './components/InsideDetails';
+import CountdownTimer from './components/CountdownTimer';
+import VenueSection from './components/VenueSection';
+import RSVPForm from './components/RSVPForm';
+import MusicWidget from './components/MusicWidget';
+
+function FloatingLeaf({ style, className }) {
+  return (
+    <div className={`fixed pointer-events-none z-0 ${className}`} style={style}>
+      <svg viewBox="0 0 60 100" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%' }}>
+        <path
+          d="M30 95 C30 95 3 60 3 35 C3 15 15 3 30 3 C45 3 57 15 57 35 C57 60 30 95 30 95Z"
+          fill="#6B8E6B"
+          fillOpacity="0.12"
+        />
+        <path d="M30 95 L30 3" stroke="#6B8E6B" strokeWidth="0.6" strokeOpacity="0.2"/>
+      </svg>
+    </div>
+  );
+}
+
+export default function App() {
+  const [loaderDone, setLoaderDone] = useState(false);
+
+  // Parse ?guest=Name from URL
+  const params = new URLSearchParams(window.location.search);
+  const guestName = params.get('guest') || '';
+
+  // Loader takes ~3.7s (2.5 delay + 1.2 fade)
+  useEffect(() => {
+    const t = setTimeout(() => setLoaderDone(true), 3800);
+    return () => clearTimeout(t);
+  }, []);
+
+  return (
+    <div className="relative w-full bg-[#F8F7F4]">
+      {/* Lotus Loader Overlay */}
+      <LotusLoader />
+
+      {/* Background floating leaves (fixed, decorative) */}
+      <FloatingLeaf
+        className="float-leaf"
+        style={{ top: '10%', left: '-20px', width: 80, height: 110, opacity: 0.6 }}
+      />
+      <FloatingLeaf
+        className="float-leaf-delay"
+        style={{ top: '15%', right: '-18px', width: 65, height: 90, opacity: 0.5, transform: 'scaleX(-1)' }}
+      />
+      <FloatingLeaf
+        className="float-leaf"
+        style={{ top: '55%', left: '-15px', width: 55, height: 80, opacity: 0.4, transform: 'rotate(20deg)' }}
+      />
+      <FloatingLeaf
+        className="float-leaf-delay"
+        style={{ top: '60%', right: '-15px', width: 55, height: 80, opacity: 0.4, transform: 'rotate(-20deg) scaleX(-1)' }}
+      />
+
+      {/* Scroll snap container with all sections */}
+      <div className="scroll-container">
+        <HeroCover guestName={guestName} />
+        <InsideDetails guestName={guestName} />
+        <CountdownTimer />
+        <VenueSection />
+        <RSVPForm />
+      </div>
+
+      {/* Floating music widget */}
+      {loaderDone && <MusicWidget />}
+    </div>
+  );
+}

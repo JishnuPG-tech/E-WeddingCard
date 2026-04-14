@@ -1,0 +1,223 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  --ivory: #F8F7F4;
+  --ivory-dark: #F0EDE6;
+  --sage: #6B8E6B;
+  --sage-light: #8BA88B;
+  --sage-dark: #4A6A4A;
+  --gold: #B8913A;
+  --gold-light: #D4AF68;
+  --cream: #FAF8F2;
+  --text-dark: #2C2C2C;
+  --text-muted: #7A7060;
+  --border-light: rgba(107, 142, 107, 0.2);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--ivory);
+  font-family: 'Inter', sans-serif;
+  color: var(--text-dark);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.font-cormorant {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+}
+
+/* Scroll snap container */
+.scroll-container {
+  height: 100dvh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+.scroll-section {
+  scroll-snap-align: start;
+  min-height: 100dvh;
+}
+
+/* Gold shimmer animation for couple names */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--sage-dark) 0%,
+    var(--gold) 30%,
+    var(--gold-light) 50%,
+    var(--gold) 70%,
+    var(--sage-dark) 100%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+/* Floating leaf animation */
+@keyframes floatLeaf {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-12px) rotate(2deg); }
+  66% { transform: translateY(-6px) rotate(-1deg); }
+}
+
+.float-leaf {
+  animation: floatLeaf 6s ease-in-out infinite;
+}
+
+.float-leaf-delay {
+  animation: floatLeaf 7s ease-in-out 1.5s infinite;
+}
+
+/* Floral border */
+.floral-border {
+  border: 1px solid var(--border-light);
+  box-shadow: 
+    inset 0 0 40px rgba(107, 142, 107, 0.04),
+    0 4px 40px rgba(107, 142, 107, 0.08),
+    0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* Card glass effect */
+.glass-card {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Countdown box */
+.countdown-box {
+  background: var(--cream);
+  border: 1px solid var(--border-light);
+  box-shadow: inset 0 2px 6px rgba(107, 142, 107, 0.08), 0 1px 3px rgba(0,0,0,0.04);
+  border-radius: 12px;
+}
+
+/* Input styles */
+.wedding-input {
+  width: 100%;
+  background: var(--cream);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  color: var(--text-dark);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.wedding-input:focus {
+  border-color: var(--sage);
+  box-shadow: 0 0 0 3px rgba(107, 142, 107, 0.12);
+}
+
+/* Button styles */
+.btn-primary {
+  background: var(--sage);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 28px;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  min-height: 48px;
+  letter-spacing: 0.02em;
+}
+
+.btn-primary:hover {
+  background: var(--sage-dark);
+  box-shadow: 0 4px 16px rgba(107, 142, 107, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--sage);
+  border: 1px solid var(--sage);
+  border-radius: 8px;
+  padding: 12px 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  background: rgba(107, 142, 107, 0.08);
+}
+
+/* Divider */
+.ornamental-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--sage-light);
+}
+
+.ornamental-divider::before,
+.ornamental-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-light));
+}
+
+.ornamental-divider::after {
+  background: linear-gradient(90deg, var(--border-light), transparent);
+}
+
+/* Scroll indicator pulse */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(8px); opacity: 0.5; }
+}
+
+.scroll-indicator {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+/* Hide scrollbar but keep functionality */
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+.scroll-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
