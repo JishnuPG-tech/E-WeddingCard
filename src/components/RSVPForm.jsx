@@ -272,16 +272,30 @@ export default function RSVPForm() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.5, duration: 0.6 }}
-          className="text-center mt-6"
+           initial={{ opacity: 0 }}
+           animate={inView ? { opacity: 1 } : {}}
+           transition={{ delay: 0.5, duration: 0.6 }}
+           className="text-center mt-6 flex flex-col items-center gap-1"
         >
           <p className="font-cormorant italic text-sm text-[#7A7060] mb-2">
             Made with love for {weddingData.couple.groom} {weddingData.couple.ampersand} {weddingData.couple.bride}
           </p>
-          <p className="font-inter text-[9px] uppercase tracking-[0.2em] text-[#B8913A] opacity-70">
-            Crafted by <a href="mailto:jishnupg2005@gmail.com" title="Hire Jishnu P G" className="font-medium hover:opacity-100 transition-opacity" style={{ textDecoration: 'none', color: 'inherit' }}>Jishnu P G</a>
+          <div className="group relative inline-block">
+            <p className="font-inter text-[9px] uppercase tracking-[0.25em] text-[#8C7A5C] opacity-80 cursor-pointer">
+              Crafted by <a href="mailto:jishnupg2005@gmail.com" className="font-semibold text-[#B8913A] hover:opacity-80 transition-opacity" style={{ textDecoration: 'none' }}>Jishnu P G</a>
+            </p>
+            {/* Hover Tooltip */}
+            <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none z-[100] w-[180px]">
+               <div className="bg-[#FAF8F2] border border-[rgba(184,145,58,0.3)] rounded-lg px-3 py-2 shadow-xl">
+                 <p className="text-[#4A6A4A] text-[9.5px] font-semibold font-inter uppercase tracking-widest text-center">Full Stack Developer</p>
+                 <p className="text-[#7A7060] text-[8.5px] font-inter text-center mt-1 lowercase tracking-widest">Click to Hire via Email</p>
+               </div>
+               {/* Tooltip arrow */}
+               <div className="w-2.5 h-2.5 bg-[#FAF8F2] border-r border-b border-[rgba(184,145,58,0.3)] transform rotate-45 absolute -bottom-[5px] left-1/2 -translate-x-1/2"></div>
+            </div>
+          </div>
+          <p className="font-inter text-[6.5px] uppercase tracking-[0.25em] text-[#7A7060] opacity-40 mt-1">
+            Powered by React & Framer Motion
           </p>
         </motion.div>
       </div>
