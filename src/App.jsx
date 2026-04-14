@@ -28,6 +28,16 @@ export default function App() {
   const params = new URLSearchParams(window.location.search);
   const guestName = params.get('guest') || '';
 
+  // Developer Easter Egg Signature
+  useEffect(() => {
+    console.log(
+      "%c✨ Premium E-Wedding Card Engine ✨\n\n%cArchitected & Developed by: Jishnu P G\n\uD83D\uDCE7 Email: jishnupg2005@gmail.com\n\uD83D\uDCBB GitHub: https://github.com/JishnuPG-tech\n\n%cPowered by React, Tailwind v4, and Framer Motion.",
+      "color: #B8913A; font-size: 16px; font-weight: bold; font-family: serif;",
+      "color: #4A6A4A; font-size: 12px; font-family: monospace; line-height: 1.6;",
+      "color: #7A7060; font-size: 10px; font-style: italic;"
+    );
+  }, []);
+
   // Loader/Envelope state removes the forced timeout, relying on Envelope button click
   // so we don't auto-dissolve the loader until they "open" it.
   

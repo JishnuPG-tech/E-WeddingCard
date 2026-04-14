@@ -281,7 +281,7 @@ export default function RSVPForm() {
             Made with love for {weddingData.couple.groom} {weddingData.couple.ampersand} {weddingData.couple.bride}
           </p>
           <p className="font-inter text-[9px] uppercase tracking-[0.2em] text-[#B8913A] opacity-70">
-            Crafted by <span className="font-medium">Jishnu P G</span>
+            Crafted by <a href="mailto:jishnupg2005@gmail.com" title="Hire Jishnu P G" className="font-medium hover:opacity-100 transition-opacity" style={{ textDecoration: 'none', color: 'inherit' }}>Jishnu P G</a>
           </p>
         </motion.div>
       </div>
