@@ -1,70 +1,71 @@
 export const weddingData = {
   couple: {
-    groom: "Anand",
-    bride: "Meera",
+    groom: "Fahad",
+    bride: "Ayesha",
     ampersand: "&",
-    initials: "A&M"
+    initials: "F&A"
   },
   
   dates: {
     // JavaScript parsable ISO format (used for countdown & ICS file)
-    preciseDateIso: "2026-05-20T10:30:00+05:30",
+    preciseDateIso: "2026-11-15T10:30:00+05:30",
     
     // UI strings for the calendar view
     calendar: {
-      dayOfWeek: "Wednesday",
-      dayNumber: "20",
-      month: "May",
+      dayOfWeek: "Sunday",
+      dayNumber: "15",
+      month: "Nov",
       year: "2026",
     },
 
     // UI strings for text sections
-    headerDisplay: "May 20 · 2026",
-    rsvpDeadlineSummary: "20th", // e.g. "See you on the 20th!"
+    headerDisplay: "Nov 15 · 2026",
+    rsvpDeadlineSummary: "15th", // e.g. "See you on the 15th!"
     
     // For ICS Generator specifically
     icsFormat: {
-      dateStart: "20260520T050000Z",
-      dateEnd:   "20260520T160000Z"
+      dateStart: "20261115T050000Z",
+      dateEnd:   "20261115T160000Z"
     }
   },
 
   events: {
     ceremony: {
-      titleEn: "Muhurtham Time",
-      titleMl: "മുഹൂർത്തം",
-      timeText: "10:30 AM to 11:15 AM"
+      titleEn: "Nikah Ceremony",
+      titleMl: "നിക്കாஹ்",
+      timeText: "10:30 AM to 11:30 AM"
     },
     reception: {
-      titleEn: "Reception",
-      titleMl: "സൽക്കാരം",
+      titleEn: "Walima Reception",
+      titleMl: "വലീമ സൽക്കാരം",
       timeText: "6:00 PM onwards"
     }
   },
 
   venue: {
-    name: "Kalyana Mandapam",
+    name: "Al-Hambra Convention Center",
     addressEn: [
-      "12/45 Temple Road, Thrissur",
-      "Kerala — 680 001"
+      "124 Gateway Avenue, Kochi",
+      "Kerala — 682 011"
     ],
     // Used in ICS and sharing
-    singleLineAddress: "Kalyana Mandapam, Thrissur, Kerala",
+    singleLineAddress: "Al-Hambra Convention Center, Kochi, Kerala",
     links: {
-      googleMapsEmbed: "https://maps.google.com/maps?q=Thrissur,Kerala&output=embed&zoom=13",
-      googleMapsDirect: "https://maps.google.com/?q=Kalyana+Mandapam+Thrissur+Kerala",
+      googleMapsEmbed: "https://maps.google.com/maps?q=Kochi,Kerala&output=embed&zoom=13",
+      googleMapsDirect: "https://maps.google.com/?q=Kochi+Kerala",
     }
   },
 
   hosts: [
-    "Mr. & Mrs. Krishnan Nair",
-    "Mr. & Mrs. Suresh Menon"
+    "Mr. & Mrs. Abdul Rahman",
+    "Mr. & Mrs. Salim Khan"
   ],
 
   strings: {
-    inviteSecondaryEn: "Together with their families, we joyfully invite you to celebrate the marriage of",
+    bismillahArabic: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+    inviteSecondaryEn: "In the name of Allah, the Most Gracious, the Most Merciful. We joyfully invite you to celebrate the marriage of",
     invitePrimaryMl: "വിവാഹ ക്ഷണം",
-    envelopeSmallTitle: "വിവാഹ ക്ഷണം",
-    whatsappShareText: "You're invited to the wedding of Anand & Meera! 📍 Kalyana Mandapam, Thrissur 📅 20th May 2026"
+    envelopeSmallTitle: "BISMILLAH",
+    whatsappShareText: "You are affectionately invited to the Nikah of Fahad & Ayesha! 📍 Al-Hambra Convention Center, Kochi 📅 15th Nov 2026"
   }
 };

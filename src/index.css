@@ -1,17 +1,16 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Serif+Malayalam:wght@300;400;500;600&display=swap');
 
 :root {
-  --ivory: #F8F7F4;
-  --ivory-dark: #F0EDE6;
+  --ivory: #F5F4F0;
+  --ivory-dark: #E8E6E0;
   --sage: #6B8E6B;
-  --sage-light: #8BA88B;
-  --sage-dark: #4A6A4A;
-  --gold: #B8913A;
-  --gold-light: #D4AF68;
-  --cream: #FAF8F2;
-  --text-dark: #2C2C2C;
-  --text-muted: #7A7060;
+  --sage-light: rgba(107, 142, 107, 0.4);
+  --sage-dark: #4A634A;
+  --gold: #D4AF37;
+  --gold-light: #E5D5BA;
+  --cream: #FFFFFF;
+  --text-dark: #2D3748;
+  --text-muted: #718096;
   --border-light: rgba(107, 142, 107, 0.2);
 }
 
@@ -25,8 +24,8 @@ html {
 
 body {
   background-color: var(--ivory);
-  /* Elegant subtle paper noise texture */
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+  background-attachment: fixed;
   font-family: 'Inter', sans-serif;
   color: var(--text-dark);
   margin: 0;
@@ -44,6 +43,10 @@ body {
 
 .font-malayalam {
   font-family: 'Noto Serif Malayalam', serif;
+}
+
+.font-amiri {
+  font-family: 'Amiri', serif;
 }
 
 /* Scroll snap container */
@@ -81,37 +84,70 @@ body {
   animation: shimmer 4s linear infinite;
 }
 
-/* Floating leaf animation */
-@keyframes floatLeaf {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  33% { transform: translateY(-12px) rotate(2deg); }
-  66% { transform: translateY(-6px) rotate(-1deg); }
+/* Smooth, hardware-accelerated background animations */
+@keyframes floatPattern {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+  33% { transform: translate3d(-10px, -20px, 0) rotate(3deg); }
+  66% { transform: translate3d(8px, -10px, 0) rotate(-2deg); }
 }
 
-.float-leaf {
-  animation: floatLeaf 6s ease-in-out infinite;
+@keyframes driftSlow {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0.4; }
+  50% { transform: translate3d(15px, -15px, 0) rotate(5deg); opacity: 0.8; }
 }
 
-.float-leaf-delay {
-  animation: floatLeaf 7s ease-in-out 1.5s infinite;
+@keyframes pulseGlow {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(212,175,55,0.1)); }
+  50% { filter: drop-shadow(0 0 12px rgba(212,175,55,0.4)); transform: scale(1.05); }
+}
+
+.float-slow {
+  animation: floatPattern 12s ease-in-out infinite;
+  will-change: transform;
+}
+
+.float-slow-delay {
+  animation: floatPattern 14s ease-in-out 2s infinite reverse;
+  will-change: transform;
+}
+
+.drift-slow {
+  animation: driftSlow 9s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.pulse-glow {
+  animation: pulseGlow 5s ease-in-out infinite;
 }
 
 /* Floral border */
 .floral-border {
   border: 1px solid var(--border-light);
   box-shadow: 
-    inset 0 0 40px rgba(107, 142, 107, 0.04),
-    0 4px 40px rgba(107, 142, 107, 0.08),
-    0 1px 3px rgba(0,0,0,0.05);
+    inset 0 0 40px rgba(212,175,55,0.03),
+    0 4px 40px rgba(0,0,0,0.4),
+    0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Bright Glass Panel Base */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 28px;
+  box-shadow: 
+    0 10px 40px rgba(0,0,0,0.06), 
+    inset 0 2px 0 0 rgba(255,255,255,0.7);
 }
 
 /* Card glass effect */
 .glass-card {
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 0 8px 32px 0 rgba(107, 142, 107, 0.07), inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.05), inset 0 2px 0 0 rgba(255,255,255,0.8);
 }
 
 /* Countdown box */

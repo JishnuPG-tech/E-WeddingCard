@@ -80,37 +80,31 @@ END:VCALENDAR`;
   const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(`Wedding of ${weddingData.couple.groom} & ${weddingData.couple.bride}`)}&dates=${weddingData.dates.icsFormat.dateStart}/${weddingData.dates.icsFormat.dateEnd}&details=${encodeURIComponent('Please join us for our marriage ceremony.')}&location=${encodeURIComponent(weddingData.venue.singleLineAddress)}`;
 
   return (
-    <section className="scroll-section flex items-center justify-center bg-[#F8F7F4] px-6 py-8">
-      <div className="w-full max-w-sm mx-auto">
-        {/* Heading */}
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 18 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-6"
-        >
-          <p className="font-inter text-[10px] uppercase tracking-[0.35em] text-[#6B8E6B] mb-2">Location</p>
-          <h2 className="font-cormorant text-3xl font-semibold text-[#2C2C2C]">Venue</h2>
-        </motion.div>
-
+    <section className="scroll-section flex items-center justify-center bg-transparent px-6 py-8">
+      <div className="w-full max-w-sm mx-auto z-10 relative" ref={ref}>
         {/* Venue card */}
-        <div className="glass-card floral-border rounded-[20px] overflow-hidden">
-          {/* Map embed placeholder with green overlay */}
+        <div className="glass-card overflow-hidden pt-10 pb-6 px-1 w-full mx-auto relative z-10 rounded-3xl mt-4">
+          
+          {/* Heading moved inside Arch */}
+          <div className="text-center mb-6 relative z-10 mt-2">
+            <p className="font-inter text-[10px] uppercase tracking-[0.35em] text-[#6B8E6B] mb-2">Location</p>
+            <h2 className="font-cormorant text-3xl font-semibold text-[#1F2937]">Venue</h2>
+          </div>
+          
+          {/* Map embed */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ delay: 0.15, duration: 0.6 }}
-            className="w-full relative overflow-hidden"
-            style={{ height: 160 }}
+            className="w-[calc(100%-2rem)] h-[240px] mx-auto relative overflow-hidden rounded-2xl border border-black/5 shadow-sm"
           >
             <iframe
               title="Venue Map"
               src={weddingData.venue.links.googleMapsEmbed}
-              className="w-full h-full border-0 pointer-events-none"
+              className="w-full h-full border-0"
               loading="lazy"
+              allowFullScreen=""
             />
-            <div className="absolute inset-0 bg-[#6B8E6B] opacity-10 pointer-events-none" />
           </motion.div>
 
           <div className="px-6 py-5">
@@ -121,8 +115,8 @@ END:VCALENDAR`;
               transition={{ delay: 0.2, duration: 0.6 }}
               className="text-center mb-5"
             >
-              <h3 className="font-cormorant font-semibold text-xl text-[#2C2C2C] mb-1">{weddingData.venue.name}</h3>
-              <p className="font-inter text-sm text-[#7A7060]">
+              <h3 className="font-cormorant font-semibold text-xl text-[#1F2937] mb-1">{weddingData.venue.name}</h3>
+              <p className="font-inter text-sm text-[#718096]">
                 {weddingData.venue.addressEn[0]}<br />
                 {weddingData.venue.addressEn[1]}
               </p>
@@ -147,7 +141,7 @@ END:VCALENDAR`;
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.95 }}
                       transition={{ duration: 0.2 }}
-                      className="absolute bottom-full left-0 w-[180px] mb-2 bg-[#F8F7F4] border border-[rgba(107,142,107,0.3)] rounded-lg shadow-xl overflow-hidden z-20 flex flex-col pointer-events-auto"
+                      className="absolute bottom-full left-0 w-[180px] mb-2 bg-white/95 backdrop-blur-md border border-black/5 rounded-lg shadow-xl overflow-hidden z-20 flex flex-col pointer-events-auto"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <a 
@@ -155,13 +149,13 @@ END:VCALENDAR`;
                         target="_blank" 
                         rel="noopener noreferrer" 
                         onClick={() => setShowCalendarOpts(false)}
-                        className="p-3 text-sm text-center text-[#4A6A4A] border-b border-[rgba(107,142,107,0.1)] hover:bg-[#FAF8F2] transition border-t-0 font-inter"
+                        className="p-3 text-sm text-center text-[#1F2937] border-b border-black/5 hover:bg-black/5 transition border-t-0 font-inter"
                       >
                         Google Calendar
                       </a>
                       <button 
                         onClick={downloadICS} 
-                        className="p-3 text-sm text-center text-[#4A6A4A] hover:bg-[#FAF8F2] transition bg-transparent border-0 font-inter cursor-pointer"
+                        className="p-3 text-sm text-center text-[#1F2937] hover:bg-black/5 transition bg-transparent border-0 font-inter cursor-pointer"
                       >
                         Apple / Outlook
                       </button>
@@ -177,7 +171,7 @@ END:VCALENDAR`;
                   className="btn-secondary flex items-center justify-center gap-2"
                   style={{ fontSize: 13 }}
                 >
-                  <span className="text-[#4A6A4A] opacity-80"><CalendarPlus size={16} strokeWidth={2} /></span>
+                  <span className="text-[#6B8E6B] opacity-80"><CalendarPlus size={16} strokeWidth={2} /></span>
                   <span>Add Calendar</span>
                 </motion.button>
                 <motion.a
