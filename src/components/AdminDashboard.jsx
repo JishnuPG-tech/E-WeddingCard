@@ -13,7 +13,7 @@ export default function AdminDashboard() {
 
   // In a real production app, use an environment variable (e.g. import.meta.env.VITE_ADMIN_PIN)
   // For this template, you can change this PIN here:
-  const ADMIN_PIN = '1234';
+  const ADMIN_PIN = 'Jishnu2005';
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -76,7 +76,7 @@ export default function AdminDashboard() {
                 type="password"
                 value={pin}
                 onChange={(e) => { setPin(e.target.value); setError(''); }}
-                placeholder="Enter PIN (e.g. 1234)"
+                placeholder="Enter Password"
                 className="w-full px-4 py-3 rounded-xl border border-[rgba(107,142,107,0.2)] bg-[#FAF8F2] text-center tracking-widest outline-none focus:border-[#6B8E6B] transition-colors"
                 autoFocus
               />
