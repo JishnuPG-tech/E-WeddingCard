@@ -57,6 +57,12 @@ export default function RSVPForm() {
       setError('Please select whether you will attend.');
       return;
     }
+
+    if (attending === true && (peopleCount < 1 || peopleCount > 5)) {
+      setError('You can only RSVP for a maximum of 5 guests online. Please contact us for larger parties.');
+      return;
+    }
+
     setError('');
     setLoading(true);
     try {
@@ -249,7 +255,7 @@ export default function RSVPForm() {
                         </span>
                         <button
                           type="button"
-                          onClick={() => setPeopleCount((c) => Math.min(10, c + 1))}
+                          onClick={() => setPeopleCount((c) => Math.min(5, c + 1))}
                           className="w-10 h-10 rounded-full border border-[rgba(107,142,107,0.3)] bg-[#FAF8F2] text-[#6B8E6B] text-xl font-light flex items-center justify-center"
                         >
                           +
