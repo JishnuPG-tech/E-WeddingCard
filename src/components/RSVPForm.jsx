@@ -34,12 +34,27 @@ export default function RSVPForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!name.trim()) {
-      setError('Please enter your name.');
+    const trimmedName = name.trim();
+    
+    if (!trimmedName) {
+      setError('Please enter your full name.');
       return;
     }
+
+    // Name length validation
+    if (trimmedName.length < 3) {
+      setError('Your name is too short. Please enter your full name.');
+      return;
+    }
+
+    // Name character validation (letters, spaces, and basic punctuation only)
+    if (!/^[a-zA-Z\s.,'-]+$/.test(trimmedName)) {
+      setError('Your name contains invalid characters. Please use only letters.');
+      return;
+    }
+
     if (attending === null) {
-      setError('Please let us know if you are attending.');
+      setError('Please select whether you will attend.');
       return;
     }
     setError('');
@@ -152,8 +167,12 @@ export default function RSVPForm() {
                     type="text"
                     placeholder="Enter your full name"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="wedding-input"
+                    onChange={(e) => {
+                      setName(e.target.value);
+                      if (error.includes('name')) setError('');
+                    }}
+                    className={`wedding-input transition-colors duration-300 ${error && error.includes('name') ? 'border-[#C17A7A] focus:border-[#C17A7A] bg-[#fcf0f0]' : ''}`}
+                    maxLength={50}
                     autoComplete="name"
                   />
                 </div>
