@@ -69,12 +69,23 @@ export default function HeroCover({ guestName }) {
           {/* Small invitation label / Guest personalization badge */}
           {guestName ? (
             <motion.div variants={itemVariants} className="flex justify-center mb-5">
-              <div className="inline-block border border-[rgba(107,142,107,0.3)] shadow-sm rounded-full px-6 py-2.5 bg-[rgba(107,142,107,0.03)] backdrop-blur-sm">
-                <p className="font-inter text-[9px] uppercase tracking-[0.25em] text-[#7A7060] leading-relaxed">
+              <motion.div 
+                animate={{ boxShadow: ['0px 0px 0px rgba(184,145,58,0)', '0px 4px 20px rgba(184,145,58,0.2)', '0px 0px 0px rgba(184,145,58,0)'] }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                className="inline-block relative rounded-full px-7 py-3 bg-gradient-to-br from-[#FAF8F2] to-[#F2EBE0] border border-[#E5CA92] overflow-hidden shadow-sm"
+              >
+                {/* Premium Glass Light Sweep */}
+                <motion.div 
+                   animate={{ x: ['-200%', '250%'] }}
+                   transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', repeatDelay: 1.5 }}
+                   className="absolute top-0 bottom-0 w-1/3 bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.9)] to-transparent -skew-x-12 z-0"
+                />
+                
+                <p className="relative z-10 font-inter text-[9px] uppercase tracking-[0.25em] text-[#7A7060] leading-relaxed">
                   Exclusive Invitation For
-                  <span className="font-semibold text-[#4A6A4A] tracking-[0.15em] text-[11px] mt-0.5 block">{guestName}</span>
+                  <span className="font-semibold text-[#B8913A] tracking-[0.2em] text-[11px] mt-0.5 block drop-shadow-sm">{guestName}</span>
                 </p>
-              </div>
+              </motion.div>
             </motion.div>
           ) : (
             <motion.div variants={itemVariants} className="flex justify-center mb-5">
