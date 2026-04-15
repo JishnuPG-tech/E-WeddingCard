@@ -34,7 +34,16 @@ When building new themes for this engine, adhere strictly to these UI constraint
 - **Security:** Hardcoded PIN authentication (`Jishnu2005` in `src/components/AdminDashboard.jsx`).
 - **Data Flow:** Uses `supabaseClient` to fetch, sort, and display attendees. Includes UI headcount cap constraints (Max 5 via `RSVPForm`).
 
-## 5. Roadmap: Building Future Themes
+## 5. Future Concept Templates
+
+### A. The "Royal Palace" Theme (Maximalist Hindu Dark Mode)
+A concept to act as the heavy, rich counterpart to the current minimal Kerala theme.
+- **Color Palette:** Deep Maroon/Crimson (`#4A0E17`) fading to Indigo. Heavy Antique Gold Foil accents (`#D4AF37`) and text.
+- **Entry Animation:** Replace the sliding paper envelope with two massive, intricately carved heavy Palace Doors (Jharokha Indian arches) that slide apart horizontally to reveal the dark invitation inside.
+- **UI Elements:** Subtle flickering clay Diya lamps at the footer. Instead of modern confetti, a cascading Framer Motion waterfall of falling orange Marigold petals.
+- **Typography:** Heavy ornate Sanksrit-display fonts for headers, paired with elegant scripts.
+
+### B. Building Islamic or Christian Themes
 When the user requests to build the **Islamic** or **Christian** themes, follow this exact workflow:
 1. Create a git branch (e.g., `git checkout -b theme-islamic`).
 2. Update the `weddingData.js` strings to feature Arabic/Biblical quotes.
