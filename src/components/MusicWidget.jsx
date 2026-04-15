@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 // Using a royalty-free Kerala instrumental from a CDN
 // You can replace this with your own audio file in /public
-const AUDIO_SRC = '/music.mp3';
+const AUDIO_SRC = '/music.m4a';
 
 export default function MusicWidget() {
   const audioRef = useRef(null);
