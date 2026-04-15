@@ -2,16 +2,8 @@ import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { Check, X } from 'lucide-react';
 import Confetti from 'react-confetti';
-import { createClient } from '@supabase/supabase-js';
+import { supabase } from '../config/supabase';
 import { weddingData } from '../config/weddingData';
-
-const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || '';
-const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || '';
-
-const supabase =
-  SUPABASE_URL && SUPABASE_ANON_KEY
-    ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-    : null;
 
 async function submitRSVP({ name, attending, peopleCount }) {
   if (supabase) {

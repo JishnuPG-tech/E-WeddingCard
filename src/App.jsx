@@ -5,6 +5,7 @@ import InsideDetails from './components/InsideDetails';
 import VenueSection from './components/VenueSection';
 import RSVPForm from './components/RSVPForm';
 import MusicWidget from './components/MusicWidget';
+import AdminDashboard from './components/AdminDashboard';
 
 function FloatingLeaf({ style, className }) {
   return (
@@ -22,6 +23,11 @@ function FloatingLeaf({ style, className }) {
 }
 
 export default function App() {
+  // Simple manual routing for the admin dashboard
+  if (window.location.pathname === '/admin') {
+    return <AdminDashboard />;
+  }
+
   const [loaderDone, setLoaderDone] = useState(false);
 
   // Parse ?guest=Name from URL
