@@ -14,12 +14,19 @@ const LeafSvg = ({ className }) => (
   </svg>
 );
 
-// Small lotus accent
-const LotusMini = () => (
-  <svg viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-10 h-7 mx-auto">
-    <path d="M30 35 C25 25 10 20 5 10 C15 12 25 18 30 25 C35 18 45 12 55 10 C50 20 35 25 30 35Z" fill="#B8913A" fillOpacity="0.6"/>
-    <path d="M30 35 C28 22 18 15 15 5 C22 10 28 20 30 30 C32 20 38 10 45 5 C42 15 32 22 30 35Z" fill="#B8913A" fillOpacity="0.4"/>
-    <path d="M30 35 V5" stroke="#B8913A" strokeWidth="0.8" strokeOpacity="0.5"/>
+// Elegant Islamic Lantern accent
+const LanternMini = () => (
+  <svg viewBox="0 0 60 80" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-12 mx-auto">
+    <path d="M30 0 L30 15" stroke="#D4AF37" strokeWidth="1" strokeOpacity="0.8"/>
+    <path d="M25 15 L35 15 L38 25 L22 25 Z" fill="#D4AF37" fillOpacity="0.8"/>
+    <path d="M22 25 L38 25 L40 55 L20 55 Z" fill="transparent" stroke="#D4AF37" strokeWidth="1.5" strokeOpacity="0.6"/>
+    <path d="M25 25 L35 25 L32 55 L28 55 Z" fill="#D4AF37" fillOpacity="0.1"/>
+    <path d="M15 55 L45 55 L35 65 L25 65 Z" fill="#D4AF37" fillOpacity="0.8"/>
+    <path d="M28 65 L28 75 M32 65 L32 75 M30 65 L30 78" stroke="#D4AF37" strokeWidth="1" strokeOpacity="0.5"/>
+    {/* Inner glow / candle */}
+    <circle cx="30" cy="45" r="3" fill="#FFE8A1" fillOpacity="0.9">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="3s" repeatCount="indefinite" />
+    </circle>
   </svg>
 );
 
@@ -37,94 +44,80 @@ const itemVariants = {
 
 export default function HeroCover({ guestName }) {
   return (
-    <section className="scroll-section relative flex items-center justify-center overflow-hidden bg-[#F8F7F4]">
-      {/* Background decorative leaves */}
-      <div className="float-leaf absolute -top-4 -left-6 opacity-40 pointer-events-none" style={{ width: 100 }}>
-        <LeafSvg />
-      </div>
-      <div className="float-leaf-delay absolute -top-2 -right-8 opacity-30 pointer-events-none scale-x-[-1]" style={{ width: 80 }}>
-        <LeafSvg />
-      </div>
-      <div className="float-leaf absolute -bottom-8 -left-4 opacity-25 pointer-events-none rotate-180" style={{ width: 90 }}>
-        <LeafSvg />
-      </div>
-      <div className="float-leaf-delay absolute -bottom-6 -right-6 opacity-25 pointer-events-none rotate-180 scale-x-[-1]" style={{ width: 70 }}>
-        <LeafSvg />
-      </div>
+    <section className="scroll-section relative flex items-center justify-center overflow-hidden bg-transparent">
 
       {/* Main card */}
-      <div className="w-full max-w-sm mx-auto px-6 py-12 text-center z-10 relative">
+      <div className="w-full max-w-sm mx-auto px-6 py-8 text-center z-10 relative mt-4">
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="glass-card floral-border rounded-[20px] px-8 py-10 relative"
+          className="glass-panel relative z-10 pt-[50px] pb-10 px-6 flex flex-col items-center mt-6"
         >
-          {/* Corner flourishes */}
-          <div className="absolute top-3 left-3 w-10 h-10 border-t border-l border-[#B8913A] border-opacity-40 rounded-tl-lg" />
-          <div className="absolute top-3 right-3 w-10 h-10 border-t border-r border-[#B8913A] border-opacity-40 rounded-tr-lg" />
-          <div className="absolute bottom-3 left-3 w-10 h-10 border-b border-l border-[#B8913A] border-opacity-40 rounded-bl-lg" />
-          <div className="absolute bottom-3 right-3 w-10 h-10 border-b border-r border-[#B8913A] border-opacity-40 rounded-br-lg" />
+          {/* Inner glass border to make it look incredibly premium */}
+          <div className="absolute inset-[8px] rounded-[22px] border border-white/40 opacity-50 pointer-events-none" />
 
           {/* Small invitation label / Guest personalization badge */}
           {guestName ? (
             <motion.div variants={itemVariants} className="flex justify-center mb-5">
               <motion.div 
-                animate={{ boxShadow: ['0px 0px 0px rgba(184,145,58,0)', '0px 4px 20px rgba(184,145,58,0.2)', '0px 0px 0px rgba(184,145,58,0)'] }}
+                animate={{ boxShadow: ['0px 0px 0px rgba(212,175,55,0)', '0px 4px 20px rgba(212,175,55,0.4)', '0px 0px 0px rgba(212,175,55,0)'] }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                className="inline-block relative rounded-full px-7 py-3 bg-gradient-to-br from-[#FAF8F2] to-[#F2EBE0] border border-[#E5CA92] overflow-hidden shadow-sm"
+                className="inline-block relative rounded-full px-7 py-3 bg-white/70 backdrop-blur-md border border-white/50 overflow-hidden shadow-sm"
               >
                 {/* Premium Glass Light Sweep */}
                 <motion.div 
                    animate={{ x: ['-200%', '250%'] }}
                    transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', repeatDelay: 1.5 }}
-                   className="absolute top-0 bottom-0 w-1/3 bg-gradient-to-r from-transparent via-[rgba(255,255,255,0.9)] to-transparent -skew-x-12 z-0"
+                   className="absolute top-0 bottom-0 w-1/3 bg-gradient-to-r from-transparent via-white/80 to-transparent -skew-x-12 z-0"
                 />
                 
-                <p className="relative z-10 font-inter text-[9px] uppercase tracking-[0.25em] text-[#7A7060] leading-relaxed">
+                <p className="relative z-10 font-inter text-[9px] uppercase tracking-[0.25em] text-[#4A5D4E] leading-relaxed">
                   Exclusive Invitation For
-                  <span className="font-semibold text-[#B8913A] tracking-[0.2em] text-[11px] mt-0.5 block drop-shadow-sm">{guestName}</span>
+                  <span className="font-semibold text-[#6B8E6B] tracking-[0.2em] text-[11px] mt-0.5 block drop-shadow-sm">{guestName}</span>
                 </p>
               </motion.div>
             </motion.div>
           ) : (
             <motion.div variants={itemVariants} className="flex justify-center mb-5">
-              <div className="inline-block border border-[rgba(107,142,107,0.3)] shadow-sm rounded-full px-5 py-1.5 bg-[rgba(107,142,107,0.03)] backdrop-blur-sm">
-                <p className="font-inter text-[10px] uppercase tracking-[0.3em] text-[#7A7060]">
+              <div className="inline-block border border-[rgba(212,175,55,0.3)] shadow-sm rounded-full px-5 py-1.5 bg-[rgba(212,175,55,0.05)] backdrop-blur-sm">
+                <p className="font-inter text-[10px] uppercase tracking-[0.3em] text-[#D5C0A0]">
                   Wedding Invitation
                 </p>
               </div>
             </motion.div>
           )}
 
-          {/* Invite line with Malayalam Cultural Header */}
-          <motion.div variants={itemVariants} className="mb-5">
-            <p className="font-malayalam text-xl text-[#B8913A] opacity-80 mb-2 font-medium">{weddingData.strings.invitePrimaryMl}</p>
-            <p className="font-cormorant text-[15px] italic text-[#7A7060] leading-relaxed max-w-[240px] mx-auto">
+          {/* Invite line with Arabic Bismillah Calligraphy */}
+          <motion.div variants={itemVariants} className="mb-6 mt-2">
+            <h2 className="font-amiri text-3xl font-normal text-[#1F2937] mb-4 drop-shadow-sm tracking-wider">
+              {weddingData.strings.bismillahArabic}
+            </h2>
+            <p className="font-cormorant text-[14px] italic text-[#4A5D4E] leading-relaxed max-w-[240px] mx-auto opacity-90">
               {weddingData.strings.inviteSecondaryEn}
             </p>
           </motion.div>
 
           {/* Couple names */}
-          <motion.h1 variants={itemVariants} className="font-cormorant font-bold text-5xl leading-[0.9] tracking-[-0.02em] mb-2 gold-shimmer">
+          <motion.h1 variants={itemVariants} className="font-playfair italic text-[3.5rem] leading-[0.8] tracking-[-0.02em] mb-2 gold-shimmer drop-shadow-md">
             {weddingData.couple.groom}
           </motion.h1>
-          <motion.p variants={itemVariants} className="font-cormorant italic text-lg text-[#B8913A] mb-2">{weddingData.couple.ampersand}</motion.p>
-          <motion.h1 variants={itemVariants} className="font-cormorant font-bold text-5xl leading-[0.9] tracking-[-0.02em] mb-8 gold-shimmer">
+          <motion.p variants={itemVariants} className="font-cormorant text-2xl text-[#6B8E6B] mb-2">{weddingData.couple.ampersand}</motion.p>
+          <motion.h1 variants={itemVariants} className="font-playfair italic text-[3.5rem] leading-[0.8] tracking-[-0.02em] mb-8 gold-shimmer drop-shadow-md">
             {weddingData.couple.bride}
           </motion.h1>
 
-          {/* Lotus accent moved to bottom center */}
+          {/* Lantern accent moved to bottom center */}
           <motion.div variants={itemVariants} className="mb-4">
-            <LotusMini />
+            <LanternMini />
           </motion.div>
 
           {/* Date teaser */}
           <motion.div variants={itemVariants}>
-            <div className="ornamental-divider text-[#B8913A] text-xs mb-4">
+            <div className="ornamental-divider text-[#D4AF37] text-xs mb-4">
               <span>✦</span>
             </div>
-            <p className="font-inter text-[12px] uppercase tracking-[0.25em] text-[#7A7060]">
+            <p className="font-inter text-[12px] uppercase tracking-[0.25em] text-[#D5C0A0]">
               {weddingData.dates.headerDisplay}
             </p>
           </motion.div>
@@ -137,7 +130,7 @@ export default function HeroCover({ guestName }) {
           transition={{ delay: 1.2, duration: 0.8 }}
           className="mt-10 flex flex-col items-center gap-2"
         >
-          <p className="font-inter text-[11px] uppercase tracking-[0.25em] text-[#7A7060]">Swipe up to open</p>
+          <p className="font-inter text-[11px] uppercase tracking-[0.25em] text-[#4A5D4E] opacity-80">Swipe up to open</p>
           <div className="scroll-indicator text-[#6B8E6B]">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M12 5v14M5 12l7 7 7-7"/>

@@ -88,13 +88,13 @@ export default function RSVPForm() {
     : `Thank you, ${name}. We understand and appreciate you letting us know. \u{1F49B}`;
 
   return (
-    <section className="scroll-section flex items-center justify-center bg-[#F5F4F0] px-6 py-8 relative overflow-hidden">
+    <section className="scroll-section flex items-center justify-center bg-transparent px-6 py-8 relative overflow-hidden">
       {showConfetti && (
         <div className="fixed inset-0 pointer-events-none z-50">
           <Confetti
             width={window.innerWidth}
             height={window.innerHeight}
-            colors={['#6B8E6B', '#B8913A', '#D4AF68', '#F8F7F4', '#4A6A4A']}
+            colors={['#D4AF37', '#F2EBE0', '#0F2E23', '#226D4D', '#E5D5BA']}
             numberOfPieces={180}
             recycle={false}
             gravity={0.25}
@@ -102,33 +102,24 @@ export default function RSVPForm() {
         </div>
       )}
 
-      <div className="w-full max-w-sm mx-auto">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 18 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-6"
-        >
-          <p className="font-inter text-[10px] uppercase tracking-[0.35em] text-[#6B8E6B] mb-2">
-            Kindly Reply
-          </p>
-          <h2 className="font-cormorant text-3xl font-semibold text-[#2C2C2C]">RSVP</h2>
-          <p className="font-cormorant italic text-base text-[#7A7060] mt-1">
-            We would love to know you will be there
-          </p>
-        </motion.div>
-
+      <div className="w-full max-w-sm mx-auto" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.15, duration: 0.7 }}
-          className="glass-card floral-border rounded-[20px] px-6 py-7 relative"
+          className="glass-card pt-[40px] pb-10 px-6 relative z-10 rounded-3xl mt-4"
         >
-          <div className="absolute top-3 left-3 w-8 h-8 border-t border-l border-[#B8913A] border-opacity-35 rounded-tl-lg" />
-          <div className="absolute top-3 right-3 w-8 h-8 border-t border-r border-[#B8913A] border-opacity-35 rounded-tr-lg" />
-          <div className="absolute bottom-3 left-3 w-8 h-8 border-b border-l border-[#B8913A] border-opacity-35 rounded-bl-lg" />
-          <div className="absolute bottom-3 right-3 w-8 h-8 border-b border-r border-[#B8913A] border-opacity-35 rounded-br-lg" />
+
+          {/* Heading moved inside Arch */}
+          <div className="text-center mb-8 relative z-10">
+            <p className="font-inter text-[10px] uppercase tracking-[0.35em] text-[#6B8E6B] mb-2">
+              Kindly Reply
+            </p>
+            <h2 className="font-cormorant text-3xl font-semibold text-[#1F2937]">RSVP</h2>
+            <p className="font-cormorant italic text-base text-[#718096] mt-1">
+              We would love to know you will be there
+            </p>
+          </div>
 
           <AnimatePresence mode="wait">
             {submitted ? (
@@ -139,20 +130,20 @@ export default function RSVPForm() {
                 transition={{ duration: 0.5, ease: 'easeOut' }}
                 className="text-center py-6"
               >
-                <div className="text-5xl mb-4">{attending ? '🌸' : '💌'}</div>
-                <h3 className="font-cormorant font-semibold text-2xl text-[#2C2C2C] mb-2">
+                <div className="text-5xl mb-4">{attending ? '✨' : '💌'}</div>
+                <h3 className="font-cormorant font-semibold text-2xl text-[#1F2937] mb-2">
                   {successTitle}
                 </h3>
-                <p className="font-inter text-sm text-[#7A7060] leading-relaxed">
+                <p className="font-inter text-sm text-[#718096] leading-relaxed">
                   {attending
                     ? `Your attendance is confirmed. See you on the ${weddingData.dates.rsvpDeadlineSummary}!`
                     : 'We understand and appreciate you letting us know.'}
                 </p>
-                <p className="font-inter text-sm text-[#7A7060] mt-1">
-                  — Thank you, <strong>{name}</strong>
+                <p className="font-inter text-sm text-[#718096] mt-1">
+                  — Thank you, <strong className="text-[#4A5D4E]">{name}</strong>
                 </p>
-                <div className="mt-5 pt-4 border-t border-[rgba(107,142,107,0.15)]">
-                  <p className="font-cormorant italic text-sm text-[#B8913A]">
+                <div className="mt-5 pt-4 border-t border-black/5">
+                  <p className="font-cormorant italic text-sm text-[#6B8E6B]">
                     With love, {weddingData.couple.groom} {weddingData.couple.ampersand} {weddingData.couple.bride}
                   </p>
                 </div>
@@ -166,7 +157,7 @@ export default function RSVPForm() {
                 className="flex flex-col gap-5"
               >
                 <div>
-                  <label className="font-inter text-[11px] uppercase tracking-[0.2em] text-[#7A7060] block mb-2">
+                  <label className="font-inter text-[11px] uppercase tracking-[0.2em] text-[#718096] block mb-2 font-medium">
                     Your Name
                   </label>
                   <input
@@ -184,7 +175,7 @@ export default function RSVPForm() {
                 </div>
 
                 <div>
-                  <label className="font-inter text-[11px] uppercase tracking-[0.2em] text-[#7A7060] block mb-2">
+                  <label className="font-inter text-[11px] uppercase tracking-[0.2em] text-[#718096] block mb-2 font-medium">
                     Will you attend?
                   </label>
                   <div className="grid grid-cols-2 gap-4 mt-1">
@@ -200,22 +191,21 @@ export default function RSVPForm() {
                           key={String(opt.value)}
                           type="button"
                           onClick={() => setAttending(opt.value)}
-                          className="flex flex-col items-center justify-center gap-3 p-5 rounded-xl border transition-all duration-300 relative overflow-hidden"
+                          className="flex flex-col items-center justify-center gap-3 p-5 rounded-2xl border transition-all duration-300 relative overflow-hidden bg-white/50"
                           style={{
-                            background: isSelected ? activeColor : 'rgba(250, 248, 242, 0.5)',
-                            borderColor: isSelected ? activeColor : 'rgba(107,142,107,0.2)',
-                            color: isSelected ? 'white' : '#7A7060',
+                            background: isSelected ? activeColor : 'rgba(255, 255, 255, 0.6)',
+                            borderColor: isSelected ? activeColor : 'rgba(0,0,0,0.06)',
+                            color: isSelected ? '#FFFFFF' : '#4A5D4E',
                             transform: isSelected ? 'scale(0.98)' : 'scale(1)',
-                            boxShadow: isSelected ? `0 4px 15px ${activeColor}40` : 'none'
+                            boxShadow: isSelected ? `0 4px 15px ${activeColor}40` : '0 2px 8px rgba(0,0,0,0.02)'
                           }}
                         >
                           {/* Circle Icon holder */}
                           <div 
                             className="w-12 h-12 rounded-full flex items-center justify-center transition-colors duration-300"
                             style={{ 
-                              background: isSelected ? 'white' : 'transparent',
-                              color: isSelected ? activeColor : '#7A7060',
-                              border: isSelected ? 'none' : '1px solid rgba(107,142,107,0.2)'
+                              background: isSelected ? 'rgba(255,255,255,0.2)' : 'rgba(107, 142, 107, 0.1)',
+                              color: isSelected ? '#FFFFFF' : activeColor,
                             }}
                           >
                             {opt.icon}
@@ -239,24 +229,24 @@ export default function RSVPForm() {
                       transition={{ duration: 0.3 }}
                       style={{ overflow: 'hidden' }}
                     >
-                      <label className="font-inter text-[11px] uppercase tracking-[0.2em] text-[#7A7060] block mb-2">
+                      <label className="font-inter text-[11px] uppercase tracking-[0.2em] text-[#718096] block mb-2 font-medium">
                         Number of Guests (including you)
                       </label>
                       <div className="flex items-center gap-4">
                         <button
                           type="button"
                           onClick={() => setPeopleCount((c) => Math.max(1, c - 1))}
-                          className="w-10 h-10 rounded-full border border-[rgba(107,142,107,0.3)] bg-[#FAF8F2] text-[#6B8E6B] text-xl font-light flex items-center justify-center"
+                          className="w-10 h-10 rounded-full border border-black/10 bg-white/60 hover:bg-white text-[#4A5D4E] text-xl font-light flex items-center justify-center transition-colors shadow-sm"
                         >
                           -
                         </button>
-                        <span className="font-cormorant text-3xl text-[#2C2C2C] min-w-[2rem] text-center">
+                        <span className="font-cormorant text-3xl text-[#1F2937] min-w-[2rem] text-center">
                           {peopleCount}
                         </span>
                         <button
                           type="button"
                           onClick={() => setPeopleCount((c) => Math.min(5, c + 1))}
-                          className="w-10 h-10 rounded-full border border-[rgba(107,142,107,0.3)] bg-[#FAF8F2] text-[#6B8E6B] text-xl font-light flex items-center justify-center"
+                          className="w-10 h-10 rounded-full border border-black/10 bg-white/60 hover:bg-white text-[#4A5D4E] text-xl font-light flex items-center justify-center transition-colors shadow-sm"
                         >
                           +
                         </button>
@@ -295,21 +285,21 @@ export default function RSVPForm() {
            className="mt-8 flex flex-col items-center justify-center w-full"
         >
           {/* Subtle gold divider */}
-          <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-[#B8913A] to-transparent opacity-40 mb-4" />
+          <div className="w-12 h-[1px] bg-gradient-to-r from-transparent via-[#6B8E6B] to-transparent opacity-30 mb-5" />
 
-          <p className="font-cormorant italic text-sm text-[#7A7060] mb-3 text-center">
+          <p className="font-cormorant italic text-sm text-[#718096] mb-4 text-center">
             Made with love for {weddingData.couple.groom} {weddingData.couple.ampersand} {weddingData.couple.bride}
           </p>
 
           <a 
             href="mailto:jishnupg2005@gmail.com"
-            className="group flex flex-col items-center gap-1.5 px-6 py-3 rounded-2xl border border-transparent hover:border-[rgba(184,145,58,0.2)] hover:bg-[rgba(255,255,255,0.4)] transition-all duration-400"
+            className="group flex flex-col items-center gap-1.5 px-6 py-3 rounded-2xl border border-transparent hover:border-black/5 hover:bg-white/40 transition-all duration-400"
             style={{ textDecoration: 'none' }}
           >
-            <p className="font-inter text-[9.5px] uppercase tracking-[0.25em] text-[#7A7060] opacity-80">
-              Crafted by <span className="font-semibold text-[#B8913A] tracking-[0.1em] group-hover:text-[#9A7A30] transition-colors">Jishnu P G</span>
+            <p className="font-inter text-[9.5px] uppercase tracking-[0.25em] text-[#718096] opacity-80">
+              Crafted by <span className="font-semibold text-[#6B8E6B] tracking-[0.1em] group-hover:text-[#4A5D4E] transition-colors">Jishnu P G</span>
             </p>
-            <p className="font-inter text-[8.5px] lowercase tracking-[0.15em] text-[#7A7060] opacity-50 group-hover:opacity-90 transition-opacity flex items-center gap-2">
+            <p className="font-inter text-[8.5px] lowercase tracking-[0.15em] text-[#a0aec0] opacity-80 group-hover:opacity-100 transition-opacity flex items-center gap-2">
               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
               jishnupg2005@gmail.com
             </p>
